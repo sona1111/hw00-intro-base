@@ -24,6 +24,8 @@ let cube: Cube;
 let prevTesselations: number = 5;
 let prevColor: Array<number> = defaultColor;
 
+let time: number = 0.0;
+
 function loadScene() {
   //icosphere = new Icosphere(vec3.fromValues(0, 0, 0), 1, controls.tesselations);
   //icosphere.create();
@@ -75,6 +77,8 @@ function main() {
 
   // This function will be called every frame
   function tick() {
+
+
     camera.update();
     stats.begin();
     gl.viewport(0, 0, window.innerWidth, window.innerHeight);
@@ -91,6 +95,9 @@ function main() {
       icosphere = new Icosphere(vec3.fromValues(0, 0, 0), 1, prevTesselations);
       icosphere.create();
     }
+
+    time += 0.01;
+    lambert.setTime(time);
     renderer.render(camera, lambert, [
       // icosphere,
       // square,

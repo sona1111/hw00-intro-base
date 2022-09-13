@@ -12,6 +12,7 @@
 precision highp float;
 
 uniform vec4 u_Color; // The color with which to render this instance of geometry.
+uniform float u_time;
 
 // These are the interpolated values out of the rasterizer, so you can't know
 // their specific values without knowing the vertices that contributed to them
@@ -186,7 +187,7 @@ void main()
         //float f = fract(sc_v.x);
 
         //float rnd = random3d(vec3(fs_Pos.x, fs_Pos.y, fs_Pos.z));
-        float rnd = perlin(fs_Pos2.x, fs_Pos2.y, fs_Pos2.z);
+        float rnd = perlin(fs_Pos2.x + u_time, fs_Pos2.y + u_time, fs_Pos2.z + u_time);
         //out_Col = vec4(vec3(rnd),1.0);
 
         //float part = mix(random(vec2(i)), random(vec2(i) + 1.0), f);

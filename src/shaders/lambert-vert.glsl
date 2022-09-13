@@ -19,6 +19,8 @@ uniform mat4 u_ViewProj;    // The matrix that defines the camera's transformati
                             // We've written a static matrix for you to use for HW2,
                             // but in HW3 you'll have to generate one yourself
 
+uniform float u_time;
+
 in vec4 vs_Pos;             // The array of vertex positions passed to the shader
 
 in vec4 vs_Nor;             // The array of vertex normals passed to the shader
@@ -47,6 +49,17 @@ void main()
 
 
     vec4 modelposition = u_Model * vs_Pos;   // Temporarily store the transformed vertex positions for use below
+
+    if(modelposition.x > 0.5){
+        modelposition = vec4(modelposition.x, sin(u_time) * modelposition.y, modelposition.z, modelposition.w);
+    }else{
+        if(modelposition.z > 0.5){
+            modelposition = vec4(modelposition.x, modelposition.y, modelposition.z, cos(u_time) * modelposition.w);
+        }else{
+            modelposition = vec4(modelposition.x, modelposition.y, tan(u_time / 4.0) * modelposition.z, modelposition.w);
+        }
+    }
+
 
     fs_LightVec = lightPos - modelposition;  // Compute the direction in which the light source lies
 
