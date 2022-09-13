@@ -81,6 +81,7 @@ class ShaderProgram {
   setGeometryColor(color: vec4) {
     this.use();
     if (this.unifColor !== -1) {
+      console.log('unifcolor', this.unifColor, color);
       gl.uniform4fv(this.unifColor, color);
     }
   }
